@@ -171,7 +171,7 @@ module Kitchen
           connection.upload_path!(file.path, remote)
           filename = File.basename(file.path)
           info("Transferring files to #{instance.to_str}")
-          run_remote("cd #{remote} && tar xvfz #{filename} > /dev/null && rm #{filename}", connection)
+          run_remote("sh -c 'cd #{remote} && tar xvfz #{filename} > /dev/null && rm #{filename}'", connection)
         end
         debug('Transfer complete')
       rescue SSHFailed, Net::SSH::Exception => ex
